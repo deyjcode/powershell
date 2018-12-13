@@ -142,11 +142,14 @@ BEGIN {
         Import-Module AzureRM -ErrorAction Stop
     }
     catch {
-        throw "Module not found. Please install the AzureRM Module."
+        throw "Unable to Import AzureRM Module. Please install the AzureRM Module."
     }
 
     switch ((Get-AzureRmContext).Name -eq 'Default') {
         $true {
+            Write-Output "Already logged into into Azure..."
+        }
+        $false {
             try {
                 Write-Output "We need to login to Azure..."
                 $azure_credential_username = Read-Host -Prompt "Please enter the username to log into Azure"
@@ -155,9 +158,6 @@ BEGIN {
             catch {
                 Write-Error $_.Exception
             }
-        }
-            $false {
-            Write-Output "Already logged into into Azure..."
         }
     }
 

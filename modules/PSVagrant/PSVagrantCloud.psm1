@@ -94,7 +94,6 @@ System.Management.Automation.PSCustomObject
         $Exception = $_
         Write-Error $Exception
     }
-
 }
 
 Function Get-VagrantCloud2FACode {
